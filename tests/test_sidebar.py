@@ -1,0 +1,60 @@
+import pytest
+
+from page_objects.login_page import LoginPage
+from utilities.config_reader import ReadConfig
+
+
+@pytest.mark.smoke
+@pytest.mark.regression
+def test_logout(create_driver):
+    # login to be moved out
+    token = ReadConfig.get_user_creds()
+    driver = create_driver
+    sidebar = LoginPage(driver).set_token(token).click_login()
+
+    sidebar.click_logout()
+    assert sidebar.is_login_present(), 'Login sidebar item is not present'
+
+
+def test_go_to_notifications(create_driver):
+    # login to be moved out
+    token = ReadConfig.get_user_creds()
+    driver = create_driver
+    sidebar = LoginPage(driver).set_token(token).click_login()
+
+    notifications_page = sidebar.go_to_notifications_page()
+    assert notifications_page.is_page_header_present(), 'Page Header is not present'
+
+
+def test_github_link(create_driver):
+    # login to be moved out
+    token = ReadConfig.get_user_creds()
+    driver = create_driver
+    sidebar = LoginPage(driver).set_token(token).click_login()
+
+    github_link = 'https://github.com/'
+    actual_github_link = sidebar.get_github_link()
+    assert actual_github_link == github_link
+
+
+@pytest.mark.regression
+def test_collapse_expand_sidebar(create_driver):
+    # login to be moved out
+    token = ReadConfig.get_user_creds()
+    driver = create_driver
+    sidebar = LoginPage(driver).set_token(token).click_login()
+
+    sidebar.hover_sidebar().collapse_sidebar()
+    assert sidebar.is_expand_button_shown(), 'No expand button for sidebar'
+    sidebar.hover_sidebar().expand_sidebar()
+    assert sidebar.is_collapse_button_shown(), 'No collapse button for sidebar'
+
+
+def test_go_to_license_details(create_driver):
+    # login to be moved out
+    token = ReadConfig.get_user_creds()
+    driver = create_driver
+    sidebar = LoginPage(driver).set_token(token).click_login()
+
+    license_details = sidebar.go_to_license_details_page()
+    assert license_details.is_license_header_shown(), 'No license header is shown'
