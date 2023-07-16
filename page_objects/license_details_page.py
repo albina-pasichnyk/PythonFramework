@@ -21,7 +21,6 @@ class LicenseDetailsPage(BasePage):
 
     def invoke_delete_license(self):
         self.click(self.__delete_button)
-        self.is_displayed(self.__remove_license_key_button)
         return self
 
     def confirm_delete(self):
@@ -44,6 +43,6 @@ class LicenseDetailsPage(BasePage):
     def is_go_to_directory_shown(self):
         return self.is_displayed(self.__go_to_directory_button)
 
-    def trigger_buy_license(self):
+    def is_buy_license_triggered(self):
         self.click(self.__buy_license_button)
         return self.is_displayed(self.__subscribe_dialog_header)

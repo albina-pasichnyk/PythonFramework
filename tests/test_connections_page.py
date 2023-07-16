@@ -1,19 +1,11 @@
 import pytest
-
-from page_objects.connections_page import ConnectionsPage
-from page_objects.login_page import LoginPage
-from utilities.config_reader import ReadConfig
+from utilities.data_randomizer import generate_invalid_invitation_code
 
 
 @pytest.mark.smoke
 @pytest.mark.regression
-def test_update_connection_status(create_driver):
-    # login to be moved out
-    token = ReadConfig.get_user_creds()
-    driver = create_driver
-    LoginPage(driver).set_token(token).click_login()
-
-    connections_page = ConnectionsPage(driver)
+def test_update_connection_status(go_to_connections_page):
+    connections_page = go_to_connections_page
     # activate > deactivated
     active_status = connections_page.get_connection_status()
     deactivated_status = connections_page.invoke_dropdown_menu().deactivate_connection().get_connection_status()
@@ -24,14 +16,9 @@ def test_update_connection_status(create_driver):
     assert reactivated_status == active_status, 'Status is not updated'
 
 
-def test_default_invitation_dialog(create_driver):
-    # login to be moved out
-    token = ReadConfig.get_user_creds()
-    driver = create_driver
-    LoginPage(driver).set_token(token).click_login()
-
-    connections_page = ConnectionsPage(driver)
-    connections_page.invoke_accept_invitation_dialog()
+def test_default_invitation_dialog(go_to_connections_page):
+    connections_page = go_to_connections_page
+    connections_page.is_accept_code_dialog_shown()
     # check content
     expected_description = 'Please paste the invitation code, received from your partner'
     expected_textarea_label = 'Enter the invitation code'
@@ -43,15 +30,10 @@ def test_default_invitation_dialog(create_driver):
 
 
 @pytest.mark.regression
-def test_invalid_invitation_code(create_driver):
-    # login to be moved out
-    token = ReadConfig.get_user_creds()
-    driver = create_driver
-    LoginPage(driver).set_token(token).click_login()
-
-    connections_page = ConnectionsPage(driver)
-    connections_page.invoke_accept_invitation_dialog()
-    invalid_invitation_code = '1234'
+def test_invalid_invitation_code(go_to_connections_page):
+    connections_page = go_to_connections_page
+    connections_page.is_accept_code_dialog_shown()
+    invalid_invitation_code = generate_invalid_invitation_code()
     connections_page.set_invitation_code(invalid_invitation_code).click_next_button()
     expected_pop_up_title = 'Invitation code is invalid'
     expected_pop_up_content = 'Please contact your partner to get the new invitation code'
@@ -65,13 +47,8 @@ def test_invalid_invitation_code(create_driver):
 
 
 @pytest.mark.regression
-def test_footer_links(create_driver):
-    # login to be moved out
-    token = ReadConfig.get_user_creds()
-    driver = create_driver
-    LoginPage(driver).set_token(token).click_login()
-
-    connections_page = ConnectionsPage(driver)
+def test_footer_links(go_to_connections_page):
+    connections_page = go_to_connections_page
     # check documentation link
     expected_documentation_link = 'https://docs.exalate.com/docs?utm_medium=product&utm_source=exalate_github'
     actual_documentation_link = connections_page.get_documentation_link()
@@ -86,11 +63,6 @@ def test_footer_links(create_driver):
     assert actual_report_a_bug_link == expected_report_a_bug_link, 'Incorrect Report a bug link'
 
 
-def test_navigation_to_support(create_driver):
-    # login to be moved out
-    token = ReadConfig.get_user_creds()
-    driver = create_driver
-    LoginPage(driver).set_token(token).click_login()
-
-    connections_page = ConnectionsPage(driver)
-    assert connections_page.navigate_to_support(), 'Support header is not present'
+def test_navigation_to_support(go_to_connections_page):
+    connections_page = go_to_connections_page
+    assert connections_page.is_support_opened(), 'Support header is not present'

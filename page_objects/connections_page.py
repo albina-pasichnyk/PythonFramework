@@ -41,8 +41,9 @@ class ConnectionsPage(BasePage):
     def get_connection_status(self):
         return self.get_text(self.__connection_status)
 
-    def invoke_accept_invitation_dialog(self):
-        return (self.click(self.__accept_invitation_button), self.is_displayed(self.__accept_invitation_modal_dialog))
+    def is_accept_code_dialog_shown(self):
+        self.click(self.__accept_invitation_button)
+        return self.is_displayed(self.__accept_invitation_modal_dialog)
 
     def set_invitation_code(self, invitation_code):
         self.send_keys(self.__invitation_code_field, invitation_code)
@@ -63,7 +64,7 @@ class ConnectionsPage(BasePage):
         return self.get_text(self.__textarea_label)
 
     def close_invitation_dialog(self):
-        return self.click(self.__close_invitation_modal_dialog)
+        self.click(self.__close_invitation_modal_dialog)
 
     def get_documentation_link(self):
         return self.get_link_value(self.__documentation_link)
@@ -74,6 +75,6 @@ class ConnectionsPage(BasePage):
     def get_report_a_bug_link(self):
         return self.get_link_value(self.__report_a_bug_link)
 
-    def navigate_to_support(self):
+    def is_support_opened(self):
         self.click(self.__support_link)
         return self.is_displayed(self.__support_page_header)

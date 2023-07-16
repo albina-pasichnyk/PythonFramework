@@ -23,11 +23,8 @@ class NotificationsPage(BasePage):
     def is_page_header_present(self):
         return self.is_displayed(self.__page_header)
 
-    def hover_tooltip(self):
-        self.hover_the_element(self.__tooltip_icon)
-        return self
-
     def get_tooltip_content(self):
+        self.hover_the_element(self.__tooltip_icon)
         return self.get_text(self.__tooltip_content)
 
     def is_default_label_displayed(self):
@@ -41,7 +38,6 @@ class NotificationsPage(BasePage):
         return self
 
     def cancel_creating_user(self):
-        self.is_displayed(self.__cancel_button)
         self.click(self.__cancel_button)
         return self
 
@@ -57,7 +53,7 @@ class NotificationsPage(BasePage):
         self.click(self.__create_user_button)
         return self
 
-    def check_user_added(self):
+    def is_user_added(self):
         return self.is_displayed(self.__created_user_name) and self.is_displayed(self.__created_user_email)
 
     def delete_user(self):

@@ -12,7 +12,7 @@ def generate_random_user_name(length=15):
     return random_user_name
 
 
-def generate_random_user_email(length=15):
+def generate_random_user_email():
     validchars = 'abcdefghijklmnopqrstuvwxyz1234567890'
     loginlen = random.randint(4, 15)
     login = ''
@@ -30,5 +30,7 @@ def generate_random_user_email(length=15):
     random_email = random_email + tlds[tldpos]
     return random_email
 
-if __name__ == '__main__':
-    generate_random_user_name()
+
+def generate_invalid_invitation_code(length=100):
+    invalid_invitation_code = ''.join(random.choice(string.ascii_letters) for i in range(length))
+    return invalid_invitation_code

@@ -23,11 +23,8 @@ class LoginPage(BasePage):
     def get_how_to_link(self):
         return self.get_link_value(self.__how_to_link)
 
-    def hover_security_tooltip(self):
-        self.hover_the_element(self.__security_tooltip_icon)
-        return self
-
     def get_tooltip_content(self):
+        self.hover_the_element(self.__security_tooltip_icon)
         return self.get_text(self.__security_tooltip)
 
     def get_security_tooltip_link(self):
@@ -39,6 +36,10 @@ class LoginPage(BasePage):
 
     def click_login(self):
         self.click(self.__login_button)
+        return SideBar(self._driver)
+
+    def login(self, token_value):
+        self.set_token(token_value).click_login()
         return SideBar(self._driver)
 
     def get_missing_pop_up_info(self):

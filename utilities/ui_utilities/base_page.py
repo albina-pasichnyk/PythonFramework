@@ -36,7 +36,7 @@ class BasePage:
     def hover_the_element(self, locator: tuple):
         actions = ActionChains(self._driver)
         self.__wait_until_element_visible(locator)
-        element_to_hover = self._driver.find_element(locator[0], locator[1])
+        element_to_hover = self.__wait_until_element_visible(locator)
         actions.move_to_element(element_to_hover).perform()
 
     def get_text(self, locator):

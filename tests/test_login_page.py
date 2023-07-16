@@ -1,36 +1,34 @@
 import pytest
-from page_objects.login_page import LoginPage
 from utilities.config_reader import ReadConfig
 from utilities.data_randomizer import generate_random_token
 
 
-def test_how_to_link(create_driver):
-    driver = create_driver
+def test_how_to_link(open_login_page):
+    login_page = open_login_page
     how_to_link_expected = 'https://docs.exalate.com/docs/how-to-generate-a-personal-access-token-in-github'
-    how_to_link_actual = LoginPage(driver).get_how_to_link()
+    how_to_link_actual = login_page.get_how_to_link()
     assert how_to_link_expected == how_to_link_actual, 'Incorrect "how to generate a personal access token" link'
 
 
 @pytest.mark.regression
-def test_security_tooltip(create_driver):
-    driver = create_driver
+def test_security_tooltip(open_login_page):
+    login_page = open_login_page
     # tooltip content
     tooltip_content_expected = 'Exalate is not storing any credential information - Read more about security.'
-    tooltip = LoginPage(driver).hover_security_tooltip()
-    tooltip_content_actual = tooltip.get_tooltip_content()
+    tooltip_content_actual = login_page.get_tooltip_content()
     assert tooltip_content_actual == tooltip_content_expected, 'Incorrect tooltip content'
     # tooltip link
     tooltip_security_link_expected = 'https://docs.exalate.com/docs/data-security-and-privacy-statement'
-    tooltip_security_link_actual = LoginPage(driver).get_security_tooltip_link()
+    tooltip_security_link_actual = login_page.get_security_tooltip_link()
     assert tooltip_security_link_actual == tooltip_security_link_expected, 'Incorrect "Read more about security" link'
 
 
 @pytest.mark.smoke
 @pytest.mark.regression
-def test_login(create_driver):
+def test_login(open_login_page):
     token = ReadConfig.get_user_creds()
-    driver = create_driver
-    sidebar = LoginPage(driver).set_token(token).click_login()
+    login_page = open_login_page
+    sidebar = login_page.login(token)
     assert sidebar.is_logout_present(), 'Logout button is not present'
 
 
@@ -40,10 +38,10 @@ def test_login(create_driver):
     (generate_random_token(), 'Invalid token', 'Please check if the token is correct.'),
     ('', 'Token is missing', 'Token field cannot be empty.')]
                          )
-def test_invalid_login(create_driver, token, pop_up_title, pop_up_content):
-    driver = create_driver
+def test_invalid_login(open_login_page, token, pop_up_title, pop_up_content):
+    login_page = open_login_page
     # error token pop up
-    token_pop_up = LoginPage(driver).set_token(token)
+    token_pop_up = open_login_page.set_token(token)
     token_pop_up.click_login()
     if token == '':
         popup_info = token_pop_up.get_missing_pop_up_info()
