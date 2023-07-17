@@ -5,8 +5,10 @@ import pytest
 @pytest.mark.regression
 def test_logout(login_to_app):
     sidebar = login_to_app
-    sidebar.click_logout()
-    assert sidebar.is_login_present(), 'Login sidebar item is not present'
+    login_page = sidebar.click_logout()
+    expected_page_header = 'Log in'
+    actual_page_header = login_page.get_login_page_header()
+    assert actual_page_header == expected_page_header, 'Not Log in page'
 
 
 def test_go_to_notifications(login_to_app):
@@ -25,9 +27,9 @@ def test_github_link(login_to_app):
 @pytest.mark.regression
 def test_collapse_expand_sidebar(login_to_app):
     sidebar = login_to_app
-    sidebar.hover_sidebar().collapse_sidebar()
+    sidebar.collapse_sidebar()
     assert sidebar.is_expand_button_shown(), 'No expand button for sidebar'
-    sidebar.hover_sidebar().expand_sidebar()
+    sidebar.expand_sidebar()
     assert sidebar.is_collapse_button_shown(), 'No collapse button for sidebar'
 
 

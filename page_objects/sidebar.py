@@ -8,7 +8,6 @@ class SideBar(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    __login_button = (By.XPATH, "//*[@class='sc-ifAKCX sc-sdtwF lGUCz']")
     __logout_button = (By.XPATH, "//span[@aria-label='Logout']")
     __notifications_sidebar_item = (By.XPATH, "//div/b[contains(text(), 'Notifications')]")
     __license_details_sidebar_item = (By.XPATH, "//div/b[contains(text(), 'License Details')]")
@@ -22,10 +21,8 @@ class SideBar(BasePage):
 
     def click_logout(self):
         self.click(self.__logout_button)
-        return self
-
-    def is_login_present(self):
-        return self.is_displayed(self.__login_button)
+        from page_objects.login_page import LoginPage
+        return LoginPage(self._driver)
 
     def go_to_notifications_page(self):
         self.click(self.__notifications_sidebar_item)
@@ -45,6 +42,7 @@ class SideBar(BasePage):
         return self
 
     def collapse_sidebar(self):
+        self.hover_the_element(self.__sidebar_area)
         self.is_displayed(self.__collapse_button)
         self.click(self.__collapse_button)
         return self
@@ -55,6 +53,7 @@ class SideBar(BasePage):
         return self
 
     def expand_sidebar(self):
+        self.hover_the_element(self.__sidebar_area)
         self.is_displayed(self.__expand_button)
         self.click(self.__expand_button)
         return self

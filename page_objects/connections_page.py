@@ -14,7 +14,6 @@ class ConnectionsPage(BasePage):
     __accept_invitation_modal_dialog = (By.XPATH, "//*[@class='sc-bwzfXH jjqluN']")
     __description_of_modal_dialog = (By.XPATH, "//*[@class='sc-htpNat jfFyHc']")
     __textarea_label = (By.XPATH, "//*[@class='sc-bZQynM zymJo']")
-    __close_invitation_modal_dialog = (By.XPATH, "//*[@class='fas fa-times']")
     __invitation_code_field = (By.XPATH, "//textarea")
     __next_button = (By.XPATH, "//*[contains(text(), 'Next')]")
     __invalid_code_pop_up = (By.XPATH, "//*[@class='sc-hwwEjo dNeRxR']")
@@ -26,24 +25,23 @@ class ConnectionsPage(BasePage):
     __support_link = (By.XPATH, "//div/a[contains(text(), 'Support')]")
     __support_page_header = (By.XPATH, "//div/h1")
 
-    def invoke_dropdown_menu(self):
-        self.click(self.__invoke_dropdown_button)
-        return self
-
     def deactivate_connection(self):
+        self.click(self.__invoke_dropdown_button)
         self.click(self.__deactivate_action_item)
         return self
 
     def activate_connection(self):
+        self.click(self.__invoke_dropdown_button)
         self.click(self.__activate_action_item)
         return self
 
     def get_connection_status(self):
         return self.get_text(self.__connection_status)
 
-    def is_accept_code_dialog_shown(self):
+    def invoke_accept_code_dialog_shown(self):
         self.click(self.__accept_invitation_button)
-        return self.is_displayed(self.__accept_invitation_modal_dialog)
+        return self
+        # self.is_displayed(self.__accept_invitation_modal_dialog)
 
     def set_invitation_code(self, invitation_code):
         self.send_keys(self.__invitation_code_field, invitation_code)
@@ -62,9 +60,6 @@ class ConnectionsPage(BasePage):
 
     def get_textarea_label(self):
         return self.get_text(self.__textarea_label)
-
-    def close_invitation_dialog(self):
-        self.click(self.__close_invitation_modal_dialog)
 
     def get_documentation_link(self):
         return self.get_link_value(self.__documentation_link)

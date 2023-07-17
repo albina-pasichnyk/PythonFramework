@@ -7,6 +7,7 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    __login_page_header = (By.XPATH, "//h1")
     __how_to_link = (By.XPATH, "//*[contains(text(), 'how to generate a personal access token.')]")
     __security_tooltip_icon = (By.XPATH, "//*[@data-icon='exclamation-circle']")
     __security_tooltip = (By.XPATH, "//div/span/a/parent::node()")
@@ -19,6 +20,9 @@ class LoginPage(BasePage):
     __token_missing_pop_up = (By.XPATH, "//*[@class='sc-hwwEjo dNeRxR']")
     __token_missing_pop_up_title = (By.XPATH, "//*[@class='sc-htpNat jfFyHc']/span")
     __token_missing_pop_up_content = (By.XPATH, "//*[@class='sc-bxivhb gVoBLL']")
+
+    def get_login_page_header(self):
+        return self.get_text(self.__login_page_header)
 
     def get_how_to_link(self):
         return self.get_link_value(self.__how_to_link)

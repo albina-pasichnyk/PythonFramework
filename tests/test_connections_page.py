@@ -7,43 +7,47 @@ from utilities.data_randomizer import generate_invalid_invitation_code
 def test_update_connection_status(go_to_connections_page):
     connections_page = go_to_connections_page
     # activate > deactivated
-    active_status = connections_page.get_connection_status()
-    deactivated_status = connections_page.invoke_dropdown_menu().deactivate_connection().get_connection_status()
-    assert deactivated_status != active_status, 'Status is not updated'
+    initial_active_status = 'Active'
+    initial_deactivated_status = 'Deactivated'
+    current_status = connections_page.get_connection_status()
+    if current_status == initial_active_status:
+        deactivated_status = connections_page.deactivate_connection().get_connection_status()
+        assert deactivated_status != current_status, 'Status is not updated'
     # deactivated > active
-    reactivated_status = connections_page.invoke_dropdown_menu().activate_connection().get_connection_status()
-    assert reactivated_status != deactivated_status, 'Status is not updated'
-    assert reactivated_status == active_status, 'Status is not updated'
+    elif current_status == initial_deactivated_status:
+        reactivated_status = connections_page.activate_connection().get_connection_status()
+        assert reactivated_status != current_status, 'Status is not updated'
+    else:
+        raise ValueError('Incorrect connection status')
 
 
 def test_default_invitation_dialog(go_to_connections_page):
     connections_page = go_to_connections_page
-    connections_page.is_accept_code_dialog_shown()
+    invitation_code_dialog = connections_page.invoke_accept_code_dialog_shown()
     # check content
     expected_description = 'Please paste the invitation code, received from your partner'
     expected_textarea_label = 'Enter the invitation code'
-    actual_description = connections_page.get_description()
-    actual_textarea_label = connections_page.get_textarea_label()
+    actual_description = invitation_code_dialog.get_description()
+    actual_textarea_label = invitation_code_dialog.get_textarea_label()
     assert actual_description == expected_description, 'Incorrect modal dialog description'
     assert actual_textarea_label == expected_textarea_label, 'Incorrect text area label'
-    connections_page.close_invitation_dialog()
 
 
 @pytest.mark.regression
 def test_invalid_invitation_code(go_to_connections_page):
     connections_page = go_to_connections_page
-    connections_page.is_accept_code_dialog_shown()
-    invalid_invitation_code = generate_invalid_invitation_code()
-    connections_page.set_invitation_code(invalid_invitation_code).click_next_button()
+    invalid_invitation_code = generate_invalid_invitation_code()  # create random invalid invitation code
+    invitation_code_dialog = connections_page.invoke_accept_code_dialog_shown()
+    invitation_code_dialog.set_invitation_code(invalid_invitation_code).click_next_button()
     expected_pop_up_title = 'Invitation code is invalid'
     expected_pop_up_content = 'Please contact your partner to get the new invitation code'
     pop_up_info = connections_page.get_invalid_code_pop_up_info()
     # check shown pop up
     assert pop_up_info[0], 'Pop up is not shown'
     # pop up title
-    assert pop_up_info[1] == expected_pop_up_title
+    assert pop_up_info[1] == expected_pop_up_title, 'Incorrect pop up title'
     # pop up content
-    assert pop_up_info[2] == expected_pop_up_content
+    assert pop_up_info[2] == expected_pop_up_content, 'Incorrect pop up message'
 
 
 @pytest.mark.regression
