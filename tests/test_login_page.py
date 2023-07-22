@@ -1,5 +1,4 @@
 import pytest
-from utilities.config_reader import ReadConfig
 from utilities.data_randomizer import generate_random_token
 
 
@@ -25,8 +24,8 @@ def test_security_tooltip(open_login_page):
 
 @pytest.mark.smoke
 @pytest.mark.regression
-def test_login(open_login_page):
-    token = ReadConfig.get_user_creds()
+def test_login(open_login_page, environment):
+    token = environment.token
     login_page = open_login_page
     sidebar = login_page.login(token)
     assert sidebar.is_logout_present(), 'Logout button is not present'
