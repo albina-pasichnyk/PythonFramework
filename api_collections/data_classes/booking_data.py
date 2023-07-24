@@ -19,5 +19,6 @@ class Booking:
             del booking_dict[booking_id_key]
         return booking_dict
 
-    def get_booking_id(self):
+    @property
+    def booking_id(self):
         return self.__booking_id

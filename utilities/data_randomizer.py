@@ -34,3 +34,13 @@ def generate_random_user_email():
 def generate_invalid_invitation_code(length=100):
     invalid_invitation_code = ''.join(random.choice(string.ascii_letters) for i in range(length))
     return invalid_invitation_code
+
+
+def generate_randon_login(length=10):
+    random_login = ''.join(random.choice(string.ascii_letters) for i in range(length))
+    return random_login
+
+
+def generate_randon_password(length=20):
+    random_password = ''.join(random.choice(string.ascii_letters) for i in range(length))
+    return random_password

@@ -1,4 +1,5 @@
 from utilities.api_utilities.base_api import BaseAPI
+from api_collections.auth_api import AuthAPI
 
 
 class BookingAPI(BaseAPI):
@@ -8,7 +9,6 @@ class BookingAPI(BaseAPI):
         self.__booking_url = '/booking'
 
     def setup_token(self, environment):
-        from api_collections.auth_api import AuthAPI
         auth_api = AuthAPI(environment)
         response = auth_api.create_token()
         token = response.json()['token']

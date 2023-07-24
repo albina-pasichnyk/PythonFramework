@@ -10,7 +10,7 @@ class BaseAPI:
 
     @property
     def token(self):
-        """Company name"""
+        """Token Value"""
         return self.__token
 
     @token.setter

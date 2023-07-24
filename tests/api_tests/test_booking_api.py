@@ -11,7 +11,7 @@ def test_get_booking_ids(booking_api):
 
 
 def test_get_booking_by_id_200(mock_booking, booking_api):
-    booking_id = mock_booking.get_booking_id()
+    booking_id = mock_booking.booking_id
     response = booking_api.get_booking_by_id(booking_id)
     actual_booking = Booking(**response.json())
     assert response.status_code == HTTPStatus.OK, 'Incorrect status code'
@@ -33,7 +33,7 @@ def test_create_booking(mock_booking, booking_api):
 
 def test_update_booking(mock_booking, booking_auth_api):
     booking_to_update = mock_booking
-    id_to_update = booking_to_update.get_booking_id()
+    id_to_update = booking_to_update.booking_id
     booking_to_update.firstname = 'Albina'
     response = booking_auth_api.update_booking(id_to_update, booking_to_update)
     assert response.status_code == HTTPStatus.OK, 'Incorrect status code'
@@ -42,7 +42,7 @@ def test_update_booking(mock_booking, booking_auth_api):
 
 
 def test_partial_update_booking(mock_booking, booking_auth_api):
-    id_to_patch = mock_booking.get_booking_id()
+    id_to_patch = mock_booking.booking_id
     param_to_update = {"firstname": "James", "lastname": "Brown"}
     response = booking_auth_api.partial_update_booking(id_to_patch, param_to_update)
     assert response.status_code == HTTPStatus.OK, 'Incorrect status code'
@@ -51,7 +51,7 @@ def test_partial_update_booking(mock_booking, booking_auth_api):
 
 
 def test_delete_booking(mock_booking, booking_auth_api):
-    id_to_delete = mock_booking.get_booking_id()
+    id_to_delete = mock_booking.booking_id
     delete_response = booking_auth_api.delete_booking(id_to_delete)
     assert delete_response.status_code == HTTPStatus.CREATED, 'Incorrect status code'
     result_after_delete = booking_auth_api.get_booking_by_id(id_to_delete)
