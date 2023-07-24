@@ -1,5 +1,10 @@
 {
   "base_url": "https://githubnode-algx-thtr-jpsr-ufze.exalate.cloud/",
   "token": "SensitiveData_Please_ask_for_it_separately",
-  "browser_id": "1"
+  "browser_id": "1",
+  "base_api": "https://restful-booker.herokuapp.com",
+  "credentials": {
+    "username": "admin",
+    "password": "password123"
+  }
 }
