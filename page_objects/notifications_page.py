@@ -1,3 +1,5 @@
+import allure
+
 from utilities.ui_utilities.base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -23,6 +25,7 @@ class NotificationsPage(BasePage):
     def is_page_header_present(self):
         return self.is_displayed(self.__page_header)
 
+    @allure.step
     def get_tooltip_content(self):
         self.hover_the_element(self.__tooltip_icon)
         return self.get_text(self.__tooltip_content)
@@ -33,22 +36,27 @@ class NotificationsPage(BasePage):
     def get_default_label(self):
         return self.get_text(self.__no_user_label)
 
+    @allure.step
     def trigger_create_user(self):
         self.click(self.__invoke_create_button)
         return self
 
+    @allure.step
     def cancel_creating_user(self):
         self.click(self.__cancel_button)
         return self
 
+    @allure.step
     def set_user_name(self, user_name_value):
         self.send_keys(self.__name_input, user_name_value)
         return self
 
+    @allure.step
     def set_user_email(self, user_email_value):
         self.send_keys(self.__email_input, user_email_value)
         return self
 
+    @allure.step
     def create_user(self):
         self.click(self.__create_user_button)
         return self
@@ -56,6 +64,7 @@ class NotificationsPage(BasePage):
     def is_user_added(self):
         return self.is_displayed(self.__created_user_name) and self.is_displayed(self.__created_user_email)
 
+    @allure.step
     def delete_user(self):
         self.click(self.__dots_menu)
         self.click(self.__delete_menu_item)
