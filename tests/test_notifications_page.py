@@ -1,7 +1,9 @@
+import allure
 import pytest
 from utilities.data_randomizer import generate_random_user_name, generate_random_user_email
 
 
+@allure.feature('Notifications Page')
 def test_notification_tooltip(go_to_notifications_page):
     notifications_page = go_to_notifications_page
     expected_tooltip_content = 'Add users to receive email notifications about Exalate errors that block synchronization.'
@@ -9,6 +11,7 @@ def test_notification_tooltip(go_to_notifications_page):
     assert actual_tooltip_content == expected_tooltip_content, 'Incorrect tooltip'
 
 
+@allure.feature('Notifications Page')
 def test_default_page_state(go_to_notifications_page):
     notifications_page = go_to_notifications_page
     expected_default_label = 'There are no users defined to receive Exalate error notifications.'
@@ -16,6 +19,7 @@ def test_default_page_state(go_to_notifications_page):
     assert actual_default_label == expected_default_label, 'Incorrect default label'
 
 
+@allure.feature('Notifications Page')
 @pytest.mark.regression
 def test_cancel_creating_user(trigger_user_creation):
     user_creation = trigger_user_creation
@@ -23,6 +27,7 @@ def test_cancel_creating_user(trigger_user_creation):
     assert user_creation.is_default_label_displayed(), 'No default label'
 
 
+@allure.feature('Notifications Page')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_create_user(trigger_user_creation):
@@ -32,6 +37,7 @@ def test_create_user(trigger_user_creation):
     assert user_creation.is_user_added(), 'User is not created'
 
 
+@allure.feature('Notifications Page')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_delete_user(go_to_notifications_page):

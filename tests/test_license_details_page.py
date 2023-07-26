@@ -1,6 +1,8 @@
+import allure
 import pytest
 
 
+@allure.feature('License Details Page')
 @pytest.mark.regression
 def test_cancel_deleting_license(go_to_license_page):
     license_page = go_to_license_page
@@ -10,6 +12,7 @@ def test_cancel_deleting_license(go_to_license_page):
     assert updated_license == current_license, 'Delete not canceled. License is deleted'
 
 
+@allure.feature('License Details Page')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_delete_license(go_to_license_page):
@@ -21,6 +24,7 @@ def test_delete_license(go_to_license_page):
     assert updated_license != current_license, 'License is not deleted'
 
 
+@allure.feature('License Details Page')
 @pytest.mark.regression
 def test_buy_license_button(go_to_license_page):
     license_page = go_to_license_page
@@ -31,6 +35,7 @@ def test_buy_license_button(go_to_license_page):
     assert actual_section_name == expected_section_name, 'Incorrect section name'
 
 
+@allure.feature('License Details Page')
 @pytest.mark.regression
 def test_find_expert_section(go_to_license_page):
     license_page = go_to_license_page
@@ -41,6 +46,7 @@ def test_find_expert_section(go_to_license_page):
     assert actual_section_name == expected_section_name, 'Incorrect section name'
 
 
+@allure.feature('Exalate Subscription')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_subscribe_dialog_default_state(go_to_license_page):
