@@ -4,3 +4,4 @@ requests==2.31.0
 allure-pytest
 psycopg2==2.9.6
 SQLAlchemy==2.0.19
+pymongo==4.4.1
