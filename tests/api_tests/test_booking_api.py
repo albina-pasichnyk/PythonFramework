@@ -1,11 +1,11 @@
 from http import HTTPStatus
 
-import allure
+# import allure
 
 from api_collections.data_classes.booking_data import Booking
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_get_booking_ids(booking_api):
     response = booking_api.get_booking_ids()
     assert response.status_code == HTTPStatus.OK, 'Incorrect status code'
@@ -13,7 +13,7 @@ def test_get_booking_ids(booking_api):
     assert 'bookingid' in response.json()[0], 'bookingis key is missing'
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_get_booking_by_id_200(mock_booking, booking_api):
     booking_id = mock_booking.booking_id
     response = booking_api.get_booking_by_id(booking_id)
@@ -22,14 +22,14 @@ def test_get_booking_by_id_200(mock_booking, booking_api):
     assert mock_booking.get_body_dict() == actual_booking.get_body_dict(), 'Incorrect response content'
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_get_booking_by_id_404(booking_api):
     invalid_booking_id = 'qwerty'
     response = booking_api.get_booking_by_id(invalid_booking_id)
     assert response.status_code == HTTPStatus.NOT_FOUND, 'Incorrect status code'
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_create_booking(mock_booking, booking_api):
     response = booking_api.create_booking(mock_booking)
     assert response.status_code == HTTPStatus.OK, 'Incorrect status code'
@@ -37,7 +37,7 @@ def test_create_booking(mock_booking, booking_api):
     assert mock_booking.get_body_dict() == created_booking.get_body_dict(), 'Incorrect body/content of created booking'
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_update_booking(mock_booking, booking_auth_api):
     booking_to_update = mock_booking
     id_to_update = booking_to_update.booking_id
@@ -48,7 +48,7 @@ def test_update_booking(mock_booking, booking_auth_api):
     assert updated_booking.firstname == booking_to_update.firstname, 'Incorrect update of booking'
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_partial_update_booking(mock_booking, booking_auth_api):
     id_to_patch = mock_booking.booking_id
     param_to_update = {"firstname": "James", "lastname": "Brown"}
@@ -58,7 +58,7 @@ def test_partial_update_booking(mock_booking, booking_auth_api):
     assert patched_booking.firstname == param_to_update['firstname'], 'Incorrect partial update of booking'
 
 
-@allure.feature('API Tests')
+# @allure.feature('API Tests')
 def test_delete_booking(mock_booking, booking_auth_api):
     id_to_delete = mock_booking.booking_id
     delete_response = booking_auth_api.delete_booking(id_to_delete)
