@@ -1,4 +1,4 @@
-import allure
+# import allure
 
 from page_objects.license_details_page import LicenseDetailsPage
 from page_objects.notifications_page import NotificationsPage
@@ -21,13 +21,13 @@ class SideBar(BasePage):
     def is_logout_present(self):
         return self.is_displayed(self.__logout_button)
 
-    @allure.step
+    # @allure.step
     def click_logout(self):
         self.click(self.__logout_button)
         from page_objects.login_page import LoginPage
         return LoginPage(self._driver)
 
-    @allure.step
+    # @allure.step
     def go_to_notifications_page(self):
         self.click(self.__notifications_sidebar_item)
         return NotificationsPage(self._driver)
@@ -36,7 +36,7 @@ class SideBar(BasePage):
         self.is_displayed(self.__github_link)
         return self.get_link_value(self.__github_link)
 
-    @allure.step
+    # @allure.step
     def hover_sidebar(self):
         self.hover_the_element(self.__sidebar_area)
         return self
@@ -46,7 +46,7 @@ class SideBar(BasePage):
         self.is_displayed(self.__collapse_button)
         return self
 
-    @allure.step
+    # @allure.step
     def collapse_sidebar(self):
         self.hover_the_element(self.__sidebar_area)
         self.is_displayed(self.__collapse_button)
@@ -58,14 +58,13 @@ class SideBar(BasePage):
         self.is_displayed(self.__expand_button)
         return self
 
-    @allure.step
+    # @allure.step
     def expand_sidebar(self):
         self.hover_the_element(self.__sidebar_area)
         self.is_displayed(self.__expand_button)
         self.click(self.__expand_button)
         return self
 
-    @allure.step
     def go_to_license_details_page(self):
         self.click(self.__license_details_sidebar_item)
         return LicenseDetailsPage(self._driver)
