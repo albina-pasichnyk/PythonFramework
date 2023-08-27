@@ -1,4 +1,4 @@
-import allure
+# import allure
 
 from utilities.api_utilities.base_api import BaseAPI
 
@@ -9,7 +9,7 @@ class AuthAPI(BaseAPI):
         self.__auth_url = '/auth'
         self.__credentials = environment.credentials
 
-    @allure.step
+    # @allure.step
     def create_token(self, credentials=None):
         if credentials is None:
             credentials = self.__credentials
