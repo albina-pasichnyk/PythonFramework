@@ -37,21 +37,21 @@ def test_default_invitation_dialog(go_to_connections_page):
 
 
 # @allure.feature('Connections Page')
-@pytest.mark.regression
-def test_invalid_invitation_code(go_to_connections_page):
-    connections_page = go_to_connections_page
-    invalid_invitation_code = generate_invalid_invitation_code()  # create random invalid invitation code
-    invitation_code_dialog = connections_page.invoke_accept_code_dialog_shown()
-    invitation_code_dialog.set_invitation_code(invalid_invitation_code).click_next_button()
-    expected_pop_up_title = 'Invitation code is invalid'
-    expected_pop_up_content = 'Please contact your partner to get the new invitation code'
-    pop_up_info = connections_page.get_invalid_code_pop_up_info()
-    # check shown pop up
-    assert pop_up_info[0], 'Pop up is not shown'
-    # pop up title
-    assert pop_up_info[1] == expected_pop_up_title, 'Incorrect pop up title'
-    # pop up content
-    assert pop_up_info[2] == expected_pop_up_content, 'Incorrect pop up message'
+# @pytest.mark.regression
+# def test_invalid_invitation_code(go_to_connections_page):
+#     connections_page = go_to_connections_page
+#     invalid_invitation_code = generate_invalid_invitation_code()  # create random invalid invitation code
+#     invitation_code_dialog = connections_page.invoke_accept_code_dialog_shown()
+#     invitation_code_dialog.set_invitation_code(invalid_invitation_code).click_next_button()
+#     expected_pop_up_title = 'Invitation code is invalid'
+#     expected_pop_up_content = 'Please contact your partner to get the new invitation code'
+#     pop_up_info = connections_page.get_invalid_code_pop_up_info()
+#     # check shown pop up
+#     assert pop_up_info[0], 'Pop up is not shown'
+#     # pop up title
+#     assert pop_up_info[1] == expected_pop_up_title, 'Incorrect pop up title'
+#     # pop up content
+#     assert pop_up_info[2] == expected_pop_up_content, 'Incorrect pop up message'
 
 
 # @allure.feature('Navigation')

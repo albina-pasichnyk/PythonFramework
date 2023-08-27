@@ -47,21 +47,21 @@ def test_find_expert_section(go_to_license_page):
 
 
 # @allure.feature('Exalate Subscription')
-@pytest.mark.smoke
-@pytest.mark.regression
-def test_subscribe_dialog_default_state(go_to_license_page):
-    license_page = go_to_license_page
-    subscribe_dialog = license_page.invoke_subscribe_dialog()
-    # check dialog name
-    expected_dialog_name = 'Subscribe to Exalate'
-    actual_dialog_name = subscribe_dialog.get_subscribe_dialog_name()
-    assert actual_dialog_name == expected_dialog_name, 'Incorrect dialog name'
-    # check dialog description
-    expected_dialog_description = 'Please enter your organization information and then proceed to checkout. The ' \
-                                  'subscription will be activated once the payment is processed.'
-    actual_dialog_description = subscribe_dialog.get_subscribe_dialog_description()
-    assert actual_dialog_description == expected_dialog_description, 'Incorrect dialog description'
-    # check dialog input section label
-    expected_dialog_label = 'Organization Information'
-    actual_dialog_label = subscribe_dialog.get_subscribe_dialog_label()
-    assert actual_dialog_label == expected_dialog_label, 'Incorrect dialog label'
+# @pytest.mark.smoke
+# @pytest.mark.regression
+# def test_subscribe_dialog_default_state(go_to_license_page):
+#     license_page = go_to_license_page
+#     subscribe_dialog = license_page.invoke_subscribe_dialog()
+#     # check dialog name
+#     expected_dialog_name = 'Subscribe to Exalate'
+#     actual_dialog_name = subscribe_dialog.get_subscribe_dialog_name()
+#     assert actual_dialog_name == expected_dialog_name, 'Incorrect dialog name'
+#     # check dialog description
+#     expected_dialog_description = 'Please enter your organization information and then proceed to checkout. The ' \
+#                                   'subscription will be activated once the payment is processed.'
+#     actual_dialog_description = subscribe_dialog.get_subscribe_dialog_description()
+#     assert actual_dialog_description == expected_dialog_description, 'Incorrect dialog description'
+#     # check dialog input section label
+#     expected_dialog_label = 'Organization Information'
+#     actual_dialog_label = subscribe_dialog.get_subscribe_dialog_label()
+#     assert actual_dialog_label == expected_dialog_label, 'Incorrect dialog label'

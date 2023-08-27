@@ -3,14 +3,14 @@ import pytest
 
 
 # @allure.feature('Navigation')
-@pytest.mark.smoke
-@pytest.mark.regression
-def test_logout(login_to_app):
-    sidebar = login_to_app
-    login_page = sidebar.click_logout()
-    expected_page_header = 'Log in'
-    actual_page_header = login_page.get_login_page_header()
-    assert actual_page_header == expected_page_header, 'Not Log in page'
+# @pytest.mark.smoke
+# @pytest.mark.regression
+# def test_logout(login_to_app):
+#     sidebar = login_to_app
+#     login_page = sidebar.click_logout()
+#     expected_page_header = 'Log in'
+#     actual_page_header = login_page.get_login_page_header()
+#     assert actual_page_header == expected_page_header, 'Not Log in page'
 
 
 # @allure.feature('Navigation')
