@@ -1,9 +1,9 @@
-import allure
+# import allure
 import pytest
 from utilities.data_randomizer import generate_invalid_invitation_code
 
 
-@allure.feature('Connections Page')
+# @allure.feature('Connections Page')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_update_connection_status(go_to_connections_page):
@@ -23,7 +23,7 @@ def test_update_connection_status(go_to_connections_page):
         raise ValueError('Incorrect connection status')
 
 
-@allure.feature('Connections Page')
+# @allure.feature('Connections Page')
 def test_default_invitation_dialog(go_to_connections_page):
     connections_page = go_to_connections_page
     invitation_code_dialog = connections_page.invoke_accept_code_dialog_shown()
@@ -36,7 +36,7 @@ def test_default_invitation_dialog(go_to_connections_page):
     assert actual_textarea_label == expected_textarea_label, 'Incorrect text area label'
 
 
-@allure.feature('Connections Page')
+# @allure.feature('Connections Page')
 @pytest.mark.regression
 def test_invalid_invitation_code(go_to_connections_page):
     connections_page = go_to_connections_page
@@ -54,7 +54,7 @@ def test_invalid_invitation_code(go_to_connections_page):
     assert pop_up_info[2] == expected_pop_up_content, 'Incorrect pop up message'
 
 
-@allure.feature('Navigation')
+# @allure.feature('Navigation')
 @pytest.mark.regression
 def test_footer_links(go_to_connections_page):
     connections_page = go_to_connections_page
@@ -72,7 +72,7 @@ def test_footer_links(go_to_connections_page):
     assert actual_report_a_bug_link == expected_report_a_bug_link, 'Incorrect Report a bug link'
 
 
-@allure.feature('Navigation')
+# @allure.feature('Navigation')
 def test_navigation_to_support(go_to_connections_page):
     connections_page = go_to_connections_page
     assert connections_page.is_support_opened(), 'Support header is not present'

@@ -1,12 +1,12 @@
 from time import sleep
 
-import allure
+# import allure
 import pytest
 from utilities.data_randomizer import generate_random_token
 
 
-@allure.description('Test link "How to generate a personal token"')
-@allure.feature('Login Page')
+# @allure.description('Test link "How to generate a personal token"')
+# @allure.feature('Login Page')
 def test_how_to_link(open_login_page):
     login_page = open_login_page
     how_to_link_expected = 'https://docs.exalate.com/docs/how-to-generate-a-personal-access-token-in-github'
@@ -14,8 +14,8 @@ def test_how_to_link(open_login_page):
     assert how_to_link_expected == how_to_link_actual, 'Incorrect "how to generate a personal access token" link'
 
 
-@allure.description('Test tooltip and link "Read more about security"')
-@allure.feature('Login Page')
+# @allure.description('Test tooltip and link "Read more about security"')
+# @allure.feature('Login Page')
 @pytest.mark.regression
 def test_security_tooltip(open_login_page):
     login_page = open_login_page
@@ -29,7 +29,7 @@ def test_security_tooltip(open_login_page):
     assert tooltip_security_link_actual == tooltip_security_link_expected, 'Incorrect "Read more about security" link'
 
 
-@allure.feature('Login Page')
+# @allure.feature('Login Page')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_login(open_login_page, environment):
@@ -39,9 +39,9 @@ def test_login(open_login_page, environment):
     assert sidebar.is_logout_present(), 'Logout button is not present'
 
 
-@allure.feature('Login Page')
-@allure.issue('https://link_to_jira_project.com', 'XLT-1 Incorrect pop up content on failed login')
-@allure.severity('TRIVIAL')
+# @allure.feature('Login Page')
+# @allure.issue('https://link_to_jira_project.com', 'XLT-1 Incorrect pop up content on failed login')
+# @allure.severity('TRIVIAL')
 @pytest.mark.smoke
 @pytest.mark.regression
 @pytest.mark.parametrize('token,pop_up_title,pop_up_content', [

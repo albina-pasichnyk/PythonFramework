@@ -1,7 +1,7 @@
 import json
 from contextlib import suppress
 
-import allure
+# import allure
 import pytest
 
 from api_collections.auth_api import AuthAPI

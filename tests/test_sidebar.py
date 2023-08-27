@@ -1,8 +1,8 @@
-import allure
+# import allure
 import pytest
 
 
-@allure.feature('Navigation')
+# @allure.feature('Navigation')
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_logout(login_to_app):
@@ -13,14 +13,14 @@ def test_logout(login_to_app):
     assert actual_page_header == expected_page_header, 'Not Log in page'
 
 
-@allure.feature('Navigation')
+# @allure.feature('Navigation')
 def test_go_to_notifications(login_to_app):
     sidebar = login_to_app
     notifications_page = sidebar.go_to_notifications_page()
     assert notifications_page.is_page_header_present(), 'Page Header is not present'
 
 
-@allure.feature('Sidebar')
+# @allure.feature('Sidebar')
 def test_github_link(login_to_app):
     sidebar = login_to_app
     github_link = 'https://github.com/'
@@ -28,7 +28,7 @@ def test_github_link(login_to_app):
     assert actual_github_link == github_link
 
 
-@allure.feature('Sidebar')
+# @allure.feature('Sidebar')
 @pytest.mark.regression
 def test_collapse_expand_sidebar(login_to_app):
     sidebar = login_to_app
@@ -38,7 +38,7 @@ def test_collapse_expand_sidebar(login_to_app):
     assert sidebar.is_collapse_button_shown(), 'No collapse button for sidebar'
 
 
-@allure.feature('Navigation')
+# @allure.feature('Navigation')
 def test_go_to_license_details(login_to_app):
     sidebar = login_to_app
     license_details = sidebar.go_to_license_details_page()
