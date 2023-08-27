@@ -12,7 +12,7 @@ class LoginPage(BasePage):
     __how_to_link = (By.XPATH, "//*[contains(text(), 'how to generate a personal access token.')]")
     __security_tooltip_icon = (By.XPATH, "//*[@data-icon='exclamation-circle']")
     __security_tooltip = (By.XPATH, "//div/span/a/parent::node()")
-    __security_tooltip_link = (By.XPATH, "//div/span/a")
+    __security_tooltip_link = (By.XPATH, "//*[contains(text(), 'Read more about security.')]")
     __token_input = (By.XPATH, "//input")
     __login_button = (By.XPATH, "//*[@class='sc-kpOJdX eHicQo']")
     __invalid_token_pop_up = (By.XPATH, "//*[@class='sc-htpNat jfFyHc']")
